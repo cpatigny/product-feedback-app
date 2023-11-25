@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "prepare": "panda codegen && husky install",
-    "postinstall": "prisma generate",
+    "postinstall": "npx prisma migrate deploy && prisma generate",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
