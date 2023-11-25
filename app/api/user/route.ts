@@ -1,7 +1,7 @@
+import { prisma } from '@/src/lib/prisma';
 import { hash } from 'bcrypt';
 import { NextResponse } from 'next/server';
 import { ZodError, z } from 'zod';
-import { prisma } from '../../../src/lib/prisma';
 
 const userSchema = z.object({
   username: z.string().min(1, 'Username is required').max(100),

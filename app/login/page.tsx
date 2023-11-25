@@ -1,9 +1,9 @@
 'use client';
 
+import { css } from '@/styled-system/css';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { css } from '../../styled-system/css';
 
 const inputStyles = css({
   display: 'block',

@@ -1,6 +1,6 @@
+import { authOptions } from '@/src/lib/auth';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { authOptions } from '../../src/lib/auth';
 import SignOutButton from './SignOutButton';
 
 const Admin = async () => {

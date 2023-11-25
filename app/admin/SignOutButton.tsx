@@ -1,7 +1,7 @@
 'use client';
 
+import { css } from '@/styled-system/css';
 import { signOut } from 'next-auth/react';
-import { css } from '../../styled-system/css';
 
 const SignOutButton = () => {
   return (
