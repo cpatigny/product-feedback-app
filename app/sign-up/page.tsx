@@ -2,55 +2,30 @@
 
 import { css } from '@/styled-system/css';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { createUser } from './actions';
 
 const inputStyles = css({
   display: 'block',
   border: '1px solid black',
 });
 
-const SignUpPage = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-  });
-
+function SignUpPage() {
   const router = useRouter();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const response = await fetch('/api/user', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        username: formData.username,
-        email: formData.email,
-        password: formData.password,
-      }),
-    });
-
-    if (response.ok) {
-      router.push('/login');
+  const handleSubmit = async (formData: FormData) => {
+    const response = await createUser(formData);
+    if (response.error) {
       return;
     }
 
-    const data = await response.json();
-    console.error(...data.message);
+    // replace this line by a request to sign in in order to auto sign in after sign up
+    router.push('/login');
   };
 
   return (
     <div>
       <h1>Sign up</h1>
-      <form onSubmit={handleSubmit}>
+      <form action={handleSubmit}>
         <div>
           <label htmlFor='username'>Username</label>
           <input
@@ -58,8 +33,7 @@ const SignUpPage = () => {
             name='username'
             type='text'
             className={inputStyles}
-            value={formData.username}
-            onChange={handleChange}
+            aria-required='true'
           />
         </div>
         <div>
@@ -67,10 +41,9 @@ const SignUpPage = () => {
           <input
             id='email'
             name='email'
-            type='text'
+            type='email'
             className={inputStyles}
-            value={formData.email}
-            onChange={handleChange}
+            aria-required='true'
           />
         </div>
         <div>
@@ -80,14 +53,13 @@ const SignUpPage = () => {
             name='password'
             type='password'
             className={inputStyles}
-            value={formData.password}
-            onChange={handleChange}
+            aria-required='true'
           />
         </div>
         <button className={css({ bg: 'primary' })}>Sign Up</button>
       </form>
     </div>
   );
-};
+}
 
 export default SignUpPage;
