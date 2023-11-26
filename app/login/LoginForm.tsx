@@ -44,6 +44,7 @@ function LoginForm() {
           className={inputStyles}
           value={email}
           onChange={e => setEmail(e.target.value)}
+          aria-required='true'
         />
       </div>
       <div>
@@ -55,6 +56,7 @@ function LoginForm() {
           className={inputStyles}
           value={password}
           onChange={e => setPassword(e.target.value)}
+          aria-required='true'
         />
       </div>
       <button className={css({ bg: 'primary' })}>Login</button>
