@@ -1,3 +1,4 @@
+import { ROUTES } from '@/routes';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { compare } from 'bcrypt';
 import NextAuth, { NextAuthOptions } from 'next-auth';
@@ -12,7 +13,7 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/login',
+    signIn: ROUTES.LOGIN,
   },
   providers: [
     CredentialsProvider({

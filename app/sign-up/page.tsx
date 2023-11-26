@@ -1,5 +1,6 @@
 'use client';
 
+import { ROUTES } from '@/routes';
 import { css } from '@/styled-system/css';
 import { useRouter } from 'next/navigation';
 import { createUser } from './actions';
@@ -19,7 +20,7 @@ function SignUpPage() {
     }
 
     // replace this line by a request to sign in in order to auto sign in after sign up
-    router.push('/login');
+    router.push(ROUTES.LOGIN);
   };
 
   return (

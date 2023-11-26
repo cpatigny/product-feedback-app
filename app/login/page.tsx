@@ -1,5 +1,6 @@
 'use client';
 
+import { ROUTES } from '@/routes';
 import { css } from '@/styled-system/css';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
@@ -29,7 +30,7 @@ const LoginPage = () => {
       return;
     }
 
-    router.push('/admin');
+    router.push(ROUTES.ADMIN);
   };
 
   return (

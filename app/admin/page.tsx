@@ -1,3 +1,4 @@
+import { ROUTES } from '@/routes';
 import { authOptions } from '@/src/lib/auth';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
@@ -7,7 +8,7 @@ const Admin = async () => {
   const session = await getServerSession(authOptions);
 
   if (!session?.user) {
-    redirect('/login');
+    redirect(ROUTES.LOGIN);
   }
 
   return (
