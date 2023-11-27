@@ -21,17 +21,20 @@ export async function checkUsernameAvailability(username: string) {
 }
 
 const userSchema = z.object({
-  username: z.string().min(1, 'Username is required').max(100),
-  email: z.string().min(1, 'Email is required').email('Invalid email'),
-  password: z
+  name: z.string().min(1).max(40),
+  username: z
     .string()
-    .min(1, 'Password is required')
-    .min(8, 'Password must have at least 8 characters'),
+    .min(1)
+    .max(30)
+    .regex(/^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/),
+  email: z.string().min(1).email(),
+  password: z.string().min(8),
 });
 
 export async function createUser(formData: FormData) {
   try {
     const userFormData = {
+      name: formData.get('name'),
       username: formData.get('username'),
       email: formData.get('email'),
       password: formData.get('password'),
@@ -42,7 +45,7 @@ export async function createUser(formData: FormData) {
       return { error: true, message: 'Invalid form data' };
     }
 
-    const { username, email, password } = result.data;
+    const { username, email, password, name } = result.data;
 
     const isEmailAvailable = await checkEmailAvailability(email);
     if (!isEmailAvailable) {
@@ -57,6 +60,7 @@ export async function createUser(formData: FormData) {
     const hashedPassword = await hash(password, 10);
     await prisma.user.create({
       data: {
+        name,
         email,
         username,
         password: hashedPassword,

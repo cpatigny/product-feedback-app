@@ -21,6 +21,7 @@ function SignUpForm() {
     const formData = new FormData(e.currentTarget);
     const response = await createUser(formData);
     if (response.error) {
+      console.log(response.message);
       return;
     }
 
@@ -38,8 +39,24 @@ function SignUpForm() {
     >
       <h1 className={heading()}>Sign up</h1>
       <FormGroup>
+        <Label htmlFor='name'>Name</Label>
+        <Input
+          id='name'
+          name='name'
+          type='text'
+          aria-required='true'
+          placeholder='John Doe'
+        />
+      </FormGroup>
+      <FormGroup>
         <Label htmlFor='username'>Username</Label>
-        <Input id='username' name='username' type='text' aria-required='true' />
+        <Input
+          id='username'
+          name='username'
+          type='text'
+          aria-required='true'
+          placeholder='john1234'
+        />
       </FormGroup>
       <FormGroup>
         <Label htmlFor='email'>Email</Label>
