@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-duplicate-string */
 import { defineConfig } from '@pandacss/dev';
 
 export default defineConfig({
@@ -19,7 +20,6 @@ export default defineConfig({
     extend: {
       tokens: {
         colors: {
-          white: { value: '#fff' },
           purple: {
             200: { value: '#C75AF6' },
             500: { value: '#ad1fea' },
@@ -54,36 +54,64 @@ export default defineConfig({
         colors: {
           primary: { value: { base: '{colors.purple.500}' } },
           primaryAlt: { value: { base: '{colors.purple.200}' } },
-          secondary: { value: { base: '{colors.blue.200}' } },
-          secondaryAlt: { value: { base: '{colors.blue.500}' } },
+          secondary: { value: { base: '{colors.blue.500}' } },
+          secondaryAlt: { value: { base: '{colors.blue.200}' } },
           planned: { value: { base: '{colors.peach.500}' } },
           inProgress: { value: { base: '{colors.purple.500}' } },
           live: { value: { base: '{colors.skyBlue.400}' } },
           danger: { value: { base: '{colors.red.500}' } },
           dangerAlt: { value: { base: '{colors.red.200}' } },
-          background: {
+          neutral: { value: { base: '{colors.grey.100}' } },
+          neutralAlt: { value: { base: '{colors.grey.50}' } },
+          bg: {
             DEFAULT: { value: { base: '{colors.grey.300}' } },
+            content: { value: { base: 'white' } },
             header: { value: { base: '{colors.blue.800}' } },
             formField: {
               value: { base: '{colors.grey.300}' },
             },
           },
           button: {
-            background: {
-              neutral: { value: { base: '{colors.grey.100}' } },
-              neutralAlt: { value: { base: '{colors.grey.50}' } },
-            },
             text: {
-              DEFAULT: { value: { base: '{colors.bluegrey.800}' } },
+              DEFAULT: { value: { base: '{colors.blueGrey.800}' } },
               accent: { value: { base: '{colors.blue.500}' } },
             },
           },
           text: {
-            DEFAULT: { value: { base: '{colors.bluegrey.700}' } },
-            heading: { value: { base: '{colors.bluegrey.800}' } },
+            DEFAULT: { value: { base: '{colors.blueGrey.700}' } },
+            heading: { value: { base: '{colors.blueGrey.800}' } },
+            formField: { value: { base: '{colors.blueGrey.800}' } },
+          },
+        },
+        spacing: {
+          box: {
+            DEFAULT: { value: '1.5rem' },
+            lg: { value: '2rem' },
+          },
+        },
+        radii: {
+          main: { value: '0.625rem' },
+          formElement: { value: '0.3125rem' },
+        },
+        fontSizes: {
+          heading: {
+            DEFAULT: {
+              value: 'clamp(1.4rem, 0.8rem + 2.1333vw, 2rem)',
+            },
+            sub: { value: '1.125rem' },
           },
         },
       },
+    },
+  },
+
+  globalCss: {
+    'html, body': {
+      h: '100%',
+    },
+
+    body: {
+      bg: 'bg',
     },
   },
 
