@@ -1,15 +1,17 @@
 'use client';
 
 import { ROUTES } from '@/routes';
-import { css } from '@/styled-system/css';
+import FormGroup from '@/src/components/ui/FormGroup';
+import Input from '@/src/components/ui/Input';
+import Label from '@/src/components/ui/Label';
+import { box } from '@/src/recipes/box';
+import { button } from '@/src/recipes/button';
+import { heading } from '@/src/recipes/heading';
+import { css, cx } from '@/styled-system/css';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-
-const inputStyles = css({
-  display: 'block',
-  border: '1px solid black',
-});
 
 function LoginForm() {
   const [email, setEmail] = useState('');
@@ -34,32 +36,52 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
+    <form
+      onSubmit={handleSubmit}
+      className={cx(
+        box({ bg: 'content', rounded: 'main' }),
+        css({ w: '30rem', maxW: '100%', pb: '3rem' }),
+      )}
+    >
+      <h1 className={heading()}>Login</h1>
+      <FormGroup>
+        <Label htmlFor='email'>Email</Label>
+        <Input
           id='email'
           name='email'
           type='text'
-          className={inputStyles}
           value={email}
           onChange={e => setEmail(e.target.value)}
           aria-required='true'
         />
-      </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Label htmlFor='password'>Password</Label>
+        <Input
           id='password'
           name='password'
           type='password'
-          className={inputStyles}
           value={password}
           onChange={e => setPassword(e.target.value)}
           aria-required='true'
         />
-      </div>
-      <button className={css({ bg: 'primary' })}>Login</button>
+      </FormGroup>
+      <button className={cx(button(), css({ w: '100%', mt: '2.5rem' }))}>
+        Login
+      </button>
+
+      <p className={css({ color: 'text', mt: '1.2rem' })}>
+        Don't have an account ?{' '}
+        <Link
+          href={ROUTES.SIGN_UP}
+          className={css({
+            color: 'primary',
+            _hover: { textDecoration: 'underline' },
+          })}
+        >
+          Sign up
+        </Link>
+      </p>
     </form>
   );
 }
